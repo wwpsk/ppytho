@@ -1,16 +1,79 @@
-# This is a sample Python script.
+# print("hello world")
+import random
+class Student:
+    def __init__(self, name):
+        self.name = name
+        self.gladness = 50
+        self.progress = 0
+        self.alive = True
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+    def to_study(self):
+        print("Time to study")
+        self.progress += 0.12
+        self.gladness -= 3
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+    def to_sleep(self):
+        print("I will sleep")
+        self.gladness += 3
 
+    def to_chill(self):
+        print("Rest time")
+        self.gladness += 5
+        self.progress -= 0.1
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+    def is_alive(self):
+        if self.progress < -0.5:
+            print("Cast out…")
+            self.alive = False
+        elif self.gladness <= 0:
+            print("Depression…")
+            self.alive = False
+        elif self.progress > 5:
+            print("Passed externally…")
+            self.alive = False
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    def end_of_day(self):
+        print(f"Gladness = {self.gladness}")
+        print(f"Progress = {round(self.progress, 2)}")
+
+    def live(self, day):
+        day = "Day " + str(day) + " of " + self.name + " life"
+        print(f"{day:=^50}")
+        live_cube = random.randint(1, 3)
+        if live_cube == 1:
+            self.to_study()
+        elif live_cube == 2:
+            self.to_sleep()
+        elif live_cube == 3:
+            self.to_chill()
+        self.end_of_day()
+        self.is_alive()
+
+nick = Student(name="Nick")
+kate = Student(name="Kate")
+for day in range(365):
+    if nick.alive == False:
+        break
+    nick.live(day)
+    if kate.alive == False:
+        break
+    kate.live(day)
+
+# #
+# #
+# #
+# #
+#
+#
+# class Student:
+#     print("Hi")
+#     def __init__(self):
+#         self.height = 160
+#         self.money = 3000
+#         print(self)
+#
+# nick = Student()
+# nick1 = Student()
+# # print(nick.money,"$")
+# print(nick)
