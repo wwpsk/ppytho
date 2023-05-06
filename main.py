@@ -50,8 +50,8 @@ class Student:
         self.end_of_day()
         self.is_alive()
 
-nick = Student(name="Nick")
-kate = Student(name="Kate")
+nick = Student(name="Kotik")
+kate = Student(name="Sobaka")
 for day in range(365):
     if nick.alive == False:
         break
