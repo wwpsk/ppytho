@@ -1,79 +1,50 @@
-# print("hello world")
 import random
-class Student:
-    def __init__(self, name):
+
+class Cat:
+    def __init__(self, name, breed):
         self.name = name
-        self.gladness = 50
-        self.progress = 0
-        self.alive = True
+        self.breed = breed
+        self.hunger = random.randint(0, 10)
+        self.energy = random.randint(0, 10)
 
-    def to_study(self):
-        print("Time to study")
-        self.progress += 0.12
-        self.gladness -= 3
+    def play(self):
+        self.hunger += 2
+        self.energy -= 1
+        self.__update_state()
 
+    def feed(self):
+        self.hunger -= 3
+        self.energy += 2
+        self.__update_state()
 
-    def to_sleep(self):
-        print("I will sleep")
-        self.gladness += 3
+    def sleep(self):
+        self.hunger += 1
+        self.energy += 3
+        self.__update_state()
 
-    def to_chill(self):
-        print("Rest time")
-        self.gladness += 5
-        self.progress -= 0.1
+    def __update_state(self):
+        if self.hunger < 0:
+            self.hunger = 0
+        if self.hunger > 10:
+            self.hunger = 10
+        if self.energy < 0:
+            self.energy = 0
+        if self.energy > 10:
+            self.energy = 10
 
-    def is_alive(self):
-        if self.progress < -0.5:
-            print("Cast out…")
-            self.alive = False
-        elif self.gladness <= 0:
-            print("Depression…")
-            self.alive = False
-        elif self.progress > 5:
-            print("Passed externally…")
-            self.alive = False
+    def __str__(self):
+        return f"Cat '{self.name}': Breed={self.breed}, Hunger={self.hunger}, Energy={self.energy}"
 
-    def end_of_day(self):
-        print(f"Gladness = {self.gladness}")
-        print(f"Progress = {round(self.progress, 2)}")
+cat1 = Cat("Fluffy", "Persian")
+cat2 = Cat("Whiskers", "Siamese")
 
-    def live(self, day):
-        day = "Day " + str(day) + " of " + self.name + " life"
-        print(f"{day:=^50}")
-        live_cube = random.randint(1, 3)
-        if live_cube == 1:
-            self.to_study()
-        elif live_cube == 2:
-            self.to_sleep()
-        elif live_cube == 3:
-            self.to_chill()
-        self.end_of_day()
-        self.is_alive()
+print(cat1)
+print(cat2)
 
-nick = Student(name="Kotik")
-kate = Student(name="Sobaka")
-for day in range(365):
-    if nick.alive == False:
-        break
-    nick.live(day)
-    if kate.alive == False:
-        break
-    kate.live(day)
+cat1.feed()
+cat1.play()
+cat2.play()
+cat2.sleep()
 
-# #
-# #
-# #
-# #
-#
-#
-# class Student:
-#     print("Hi")
-#     def __init__(self):
-#         self.height = 160
-#         self.money = 3000
-#         print(self)
-#
-# nick = Student()
-# nick1 = Student()
-# # print(nick.money,"$")
-# print(nick)
+print(cat1)
+print(cat2)
