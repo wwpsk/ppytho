@@ -1,33 +1,43 @@
-class BankAccount:
-    def __init__(self, account_number, balance):
-        self.account_number = account_number
-        self.balance = balance
+class Компанія:
+    def __init__(self, назва):
+        self.назва = назва
+        self.працівники = []
 
-    def deposit(self, amount):
-        self.balance += amount
-        print(f'На рахунок {self.account_number} внесено {amount} одиниць.')
+    def найняти_працівника(self, працівник):
+        self.працівники.append(працівник)
 
-    def withdraw(self, amount):
-        if self.balance >= amount:
-            self.balance -= amount
-            print(f'З рахунку {self.account_number} знято {amount} одиниць.')
-        else:
-            print(f'Недостатньо коштів на рахунку {self.account_number}.')
+    def звільнити_працівника(self, працівник):
+        self.працівники.remove(працівник)
 
-    def transfer(self, other_account, amount):
-        if self.balance >= amount:
-            self.balance -= amount
-            other_account.deposit(amount)
-            print(f'З рахунку {self.account_number} переказано {amount} одиниць на рахунок {other_account.account_number}.')
-        else:
-            print(f'Недостатньо коштів на рахунку {self.account_number} для здійснення переказу.')
+    def вивести_працівників(self):
+        print(f"Працівники компанії {self.назва}:")
+        for працівник in self.працівники:
+            print(працівник)
 
-account1 = BankAccount('001', 1000)
-account2 = BankAccount('002', 500)
+class Працівник:
+    def __init__(self, ім'я, посада):
+        self.ім'я = ім'я
+        self.посада = посада
+        self.компанія = None
 
-account1.deposit(200)
-account1.withdraw(150)
-account1.transfer(account2, 300)
+    def прийняти_на_роботу(self, компанія):
+        self.компанія = компанія
+        компанія.найняти_працівника(self)
 
-account2.deposit(1000)
-account2.transfer(account1, 700)
+    def звільнитися(self):
+        self.компанія.звільнити_працівника(self)
+        self.компанія = None
+
+    def __str__(self):
+        return f"{self.ім'я}, {self.посада}"
+
+# Приклад використання
+
+компанія = Компанія("OpenAI")
+працівник1 = Працівник("Іван", "інженер")
+працівник2 = Працівник("Марія", "менеджер")
+
+працівник1.прийняти_на_роботу(компанія)
+працівник2.прийняти_на_роботу(компанія)
+
+компанія.вивести_працівників()
