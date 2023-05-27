@@ -2,12 +2,12 @@
 from bs4 import BeautifulSoup
 import requests
 # res_parse_list = []
-response = requests.get("https://aif.ru/culture/movie/kakoy_rost_u_svinki_peppy")
+response = requests.get("https://www.oschadbank.ua/currency-rate")
 if response.status_code == 200:
     soup = BeautifulSoup(response.text, features="html.parser")
-    soup_list = soup.find("div", class_="vo_o_text")
-    res = soup_list.find("p")
-    print(res.text)
+    soup_list = soup.find_all("span", class_="heading-block-currency-rate__table-txt body-regular")
+    #res = soup_list.find("td")
+    print(soup_list[9].text)
 # response_text = response.text
 # response_parse = response_text.split("<span>")
 # for parse_elem_1 in response_parse:
