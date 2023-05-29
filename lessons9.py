@@ -1,0 +1,25 @@
+# import sqlite3
+# connection = sqlite3.connect("itstep_DB.sl3", 5)
+# cur = connection.cursor()
+# print(connection)
+# print(cur)
+# connection.close()
+
+import sqlite3
+
+connection = sqlite3.connect("itstep_DB.sl3", 5)
+cur = connection.cursor()
+# cur.execute("CREATE TABLE first_table (name TEXT);")
+# cur.execute("INSERT INTO ferst_table (name) VALUES ('Nick');")
+# cur.execute("INSERT INTO ferst_table (name) VALUES ('Kate');")
+# cur.execute("INSERT INTO ferst_table (name) VALUES ('Sara');")
+# cur.execute("INSERT INTO ferst_table (name) VALUES ('Samira');")
+# cur.execute("UPDATE ferst_table SET name='Samira' WHERE rowid=3;")
+# connection.commit()
+# cur.execute("SELECT rowid, name FROM ferst_table WHERE rowid=3;")
+# connection.commit()
+cur.execute("DELETE FROM first_table WHERE rowid=4;")
+connection.commit()
+res = cur.fetchall()
+print(res)
+connection.close()
